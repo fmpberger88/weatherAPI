@@ -3,6 +3,7 @@ export async function fetchWeatherData(locaction) {
         const response = await fetch(`/api/weather?location=${locaction}`);
         const data = await response.json();
         displayTemperature(data.current.temp_c);
+        displayCity(data.location.name)
     } catch (error) {
         console.error('There was a client side error fetching weather data', error);
     }
@@ -22,5 +23,13 @@ export function displayTemperature(temperature) {
         showCelsius.textContent = `${temperature}°C`;
         celsiusDiv.appendChild(showCelsius);
     }
+}
 
+export function displayCity(city) {
+    const citySpan = document.querySelector('#cityName');
+    if (citySpan) {
+        citySpan.textContent = `${city}`;
+    } else {
+        citySpan.textContent = 'Lustig';
+    }
 }
