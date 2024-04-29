@@ -1,11 +1,45 @@
 <h1>{{title}}</h1>
-<p>Weather Information for <span id="cityName"></span></p>
 <form id="weatherForm">
-    <label>Location:</label>
-    <input type="text" name="location" id="location" placeholder="City name...">
+    <input type="text" name="location" id="location" placeholder="Search Location...">
     <button type="submit" id="searchButton">Search</button>
 </form>
-<div>
-    <div id="celsius">
+<section class="firstSection">
+    <div class="localInfo">
+        <p><span id="cityName"></span></p>
+        <div id="weatherIcon">
+        </div>
+        <div id="celsius">
+        </div>
     </div>
-</div>
+    <div class="localDetail">
+        <div id="feelsLikeCelsius">
+        </div>
+        <div id="humidity">
+        </div>
+        <div id="cloudIndex">
+        </div>
+        <div id="uvIndex">
+        </div>
+        <div id="windSpeed">
+        </div>
+    </div>
+    <div class="airQuality">
+        <div id="co">
+        </div>
+        <div id="no2">
+        </div>
+        <div id="o3">
+        </div>
+        <div id="so2">
+        </div>
+        <div id="pm25">
+        </div>
+        <div id="pm10">
+        </div>
+    </div>
+</section>
+<section class="forecast">
+    <h2>Next 3 Days</h2>
+    <div id="forecastContainer"></div>
+</section>
+

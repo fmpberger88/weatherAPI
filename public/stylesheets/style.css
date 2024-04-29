@@ -1,12 +1,122 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  line-height: 1.5rem;
+}
+
 body {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: white;
+  background: #333;
+  margin: 20px;
 }
 
 a {
   color: #00B7FF;
+}
+
+.firstSection {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 80%;
+}
+
+
+.localInfo, .localDetail, .airQuality {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  font-weight: bold;
+  background-color: rgba(238, 130, 238, 0.5);
+  width: 200px;
+  border-radius: 5px;
+}
+
+
+
+#weatherForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  gap: 30px;
+  width: 80%;
+  margin-bottom: 30px;
+}
+
+#weatherForm input {
+  width: 80%;
+  border: none;
+  border-bottom: 2px solid black;
+  padding: 10px;
+}
+
+#weatherForm button {
+  background: blueviolet;
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#weatherForm button:hover {
+  transform: scale(1.1);
+}
+
+#cityName {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+#celsius {
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+.forecast {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.forecast h2 {
+  border: 2px solid white;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 50px;
+}
+
+#forecastContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 50px;
+  margin: 50px auto;
+}
+
+.forecast-day {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(238, 130, 238, 0.5);
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
 }

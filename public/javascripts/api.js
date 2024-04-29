@@ -1,4 +1,4 @@
-import { fetchWeatherData, displayTemperature, displayCity } from "./utils.js";
+import {fetchWeatherData, displayTemperature, displayCity, fetchForeCastWeather} from "./utils.js";
 
 window.onload = async () => {
     if (navigator.geolocation) {
@@ -17,6 +17,7 @@ window.onload = async () => {
         }, async (error) => {
             console.error('There was a client side error fetching current location', error);
             await fetchWeatherData('Schaffhausen')
+            await fetchForeCastWeather('Schaffhausen');
             });
     } else {
         console.log("Geolocation is not supported");
@@ -28,5 +29,9 @@ document.querySelector('#weatherForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const location = document.querySelector('#location').value;
-    await fetchWeatherData(location);
+    await Promise.all([
+        fetchWeatherData(location),
+        fetchForeCastWeather(location),
+    ]);
+
 })
