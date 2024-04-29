@@ -1,4 +1,4 @@
-import {fetchWeatherData, displayTemperature, displayCity, fetchForeCastWeather} from "./utils.js";
+import { fetchWeatherData, fetchForeCastWeather } from "./utils.js";
 
 window.onload = async () => {
     if (navigator.geolocation) {
@@ -8,30 +8,46 @@ window.onload = async () => {
 
             try {
                 const response = await fetch(`/api/weather?latitude=${lat}&longitude=${long}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
                 const data = await response.json();
-                displayTemperature(data.current.temp_c);
-                displayCity(data.location.name);
+                await Promise.all([
+                    fetchWeatherData(data.location.name),
+                    fetchForeCastWeather(data.location.name),
+                ]);
             } catch (error) {
-                console.error('There was a client side error fetching current weather data', error);
+                console.error('There was a client-side error fetching current weather data:', error);
+                fallbackToDefaultLocation();
             }
-        }, async (error) => {
-            console.error('There was a client side error fetching current location', error);
-            await fetchWeatherData('Schaffhausen')
-            await fetchForeCastWeather('Schaffhausen');
-            });
+        }, (error) => {
+            console.error('Geolocation error:', error.message);
+            fallbackToDefaultLocation();
+        });
     } else {
-        console.log("Geolocation is not supported");
-        await fetchWeatherData('Schaffhausen');
+        console.log("Geolocation is not supported by this browser.");
+        fallbackToDefaultLocation();
     }
+}
+
+function fallbackToDefaultLocation() {
+    Promise.all([
+        fetchWeatherData('Schaffhausen'),
+        fetchForeCastWeather('Schaffhausen'),
+    ]).catch(error => {
+        console.error('Error fetching weather data for Schaffhausen:', error);
+    });
 }
 
 document.querySelector('#weatherForm').addEventListener('submit', async (e) => {
     e.preventDefault();
-
     const location = document.querySelector('#location').value;
-    await Promise.all([
-        fetchWeatherData(location),
-        fetchForeCastWeather(location),
-    ]);
-
-})
+    try {
+        await Promise.all([
+            fetchWeatherData(location),
+            fetchForeCastWeather(location),
+        ]);
+    } catch (error) {
+        console.error('Error fetching weather data:', error);
+    }
+});
